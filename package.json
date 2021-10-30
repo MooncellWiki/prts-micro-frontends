@@ -1,0 +1,52 @@
+{
+  "name": "prts-micro-frontends",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged",
+    "commit": "git-cz"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,tsx}": [
+      "npm run lint:fix",
+      "npm run lint:format",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  },
+  "dependencies": {
+    "preact": "^10.5.13",
+    "prettier": "^2.4.1"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "commitizen": "^4.2.4",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^8.1.0",
+    "eslint-config-preact": "^1.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.2.6",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4"
+  }
+}
