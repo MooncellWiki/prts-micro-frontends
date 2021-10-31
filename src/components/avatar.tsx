@@ -1,4 +1,4 @@
-import { getImagePath } from "../utils";
+import { getImagePath, professionMap } from "../utils";
 
 export function Avatar({
   size = 100,
@@ -9,7 +9,7 @@ export function Avatar({
   size?: number;
   rarity: number;
   name: string;
-  profession: string;
+  profession: keyof typeof professionMap;
 }) {
   return (
     <div class="relative" style={`width:${size}px;height:${size}px`}>
@@ -29,7 +29,9 @@ export function Avatar({
           <img
             class="lazyload h-25px"
             style={`height:${(size / 100) * 25}px;`}
-            data-src={`/images/${getImagePath(`图标_职业_${profession}.png`)}`}
+            data-src={`/images/${getImagePath(
+              `图标_职业_${professionMap[profession]}.png`
+            )}`}
           />
         </div>
       </a>

@@ -9,11 +9,13 @@ export function Tab({ selected, label, onChange }: tabProps) {
   return (
     <div class="max-w-360px flex-grow" onClick={onChange}>
       <div
-        class={`text-center py-12px px-8px ${selected ? "text-primary" : ""}`}
+        class={`text-center py-12px px-8px ${
+          selected ? "text-primary-main" : ""
+        }`}
       >
         {label}
       </div>
-      <div class={`h-2px w-full ${selected ? "bg-primary" : ""}`} />
+      <div class={`h-2px w-full ${selected ? "bg-primary-main" : ""}`} />
     </div>
   );
 }
@@ -21,12 +23,11 @@ interface tabsProps {
   labels: Array<string>;
   onChange: (index: number) => void;
   selected: number;
-  children: ComponentChildren;
-  classes? :string
+  classes?: string;
 }
-export function Tabs({ labels, onChange, selected, children, classes }: tabsProps) {
+export function Tabs({ labels, onChange, selected, classes }: tabsProps) {
   return (
-    <div>
+    <>
       <div class={`flex ${classes}`}>
         {labels.map((v, i) => (
           <Tab
@@ -40,7 +41,6 @@ export function Tabs({ labels, onChange, selected, children, classes }: tabsProp
         ))}
       </div>
       <Divider />
-      {children}
-    </div>
+    </>
   );
 }

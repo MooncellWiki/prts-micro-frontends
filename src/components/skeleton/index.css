@@ -1,0 +1,17 @@
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+.mcui-skeleton{
+  background-color: rgba(0,0,0,0.11);
+  animation: 1.5s ease-in-out infinite normal none running skeleton-pulse;
+}

@@ -1,6 +1,9 @@
 import { render } from "preact";
 import "virtual:windi.css";
-import { ItemCharReq } from "./item-char-req";
-if (location.href.includes("Widget:Item-character-requirement")) {
-  render(<ItemCharReq />, document.getElementById("root")!);
+import { ItemDemand } from "./ItemDemand";
+
+if (location.href.includes("Widget:ItemDemand")) {
+  const ele = document.getElementById("root")!;
+  const item = ele.dataset.item!;
+  render(<ItemDemand item={item} />, ele);
 }
