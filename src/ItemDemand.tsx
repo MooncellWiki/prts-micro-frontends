@@ -70,7 +70,10 @@ async function query(name: string): Promise<itemCost> {
     cost.data.push(v);
     costs[v.rarity] = cost;
     total.elite += v.elite;
-    total.skill += v.skill;
+    if (key !== "char_1001_amiya2") {
+      // 剑兔的技能1-7的需求在阿米娅那算过了
+      total.skill += v.skill;
+    }
     total.mastery += v.mastery.reduce((acc, cur) => acc + cur, 0);
   });
   total.total = total.elite + total.skill + total.mastery;
