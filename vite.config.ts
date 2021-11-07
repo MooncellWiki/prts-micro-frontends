@@ -11,4 +11,12 @@ export default defineConfig({
       protocol: "ws",
     },
   },
+  build: {
+    sourcemap: true,
+    manifest: true,
+    rollupOptions: {
+      input: "src/main.tsx",
+    },
+    assetsDir: ".",
+  },
 });

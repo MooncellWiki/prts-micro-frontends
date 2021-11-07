@@ -1,4 +1,4 @@
-import { defineConfig } from "windicss/helpers";
+import { defineConfig } from "vite-plugin-windicss";
 
 export default defineConfig({
   theme: {
@@ -8,6 +8,11 @@ export default defineConfig({
       disabled: "#9d9d9d",
       paper: "#f8f8f8",
       "primary-main": "#6a6aff",
+      table: "#eaebee",
     },
   },
+  shortcuts:{
+    img:'border-solid block align-middle max-w-full h-auto'
+  },
+  preflight: false
 });

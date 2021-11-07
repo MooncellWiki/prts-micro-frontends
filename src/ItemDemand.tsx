@@ -21,7 +21,7 @@ function Cost({
   mastery: [mastery1, mastery2, mastery3],
 }: costProps) {
   return (
-    <div class="flex flex-col justify-center items-center py-8px border-divider border-r-1px border-b-1px border-solid">
+    <div class="flex flex-col justify-center items-center my-8px ">
       <Avatar rarity={rarity} name={name} profession={profession} size={60} />
       <div class={`${elite === 0 ? "text-disabled" : ""}`}>
         精英化：
@@ -65,11 +65,11 @@ interface itemCost {
     total: number;
   };
 }
+interface resp {
+  [index: string]: costProps;
+}
 async function query(name: string): Promise<itemCost> {
-  const { data } = await api({
-    method: "get",
-    url: `/widgets/itemDemand/${name}`,
-  });
+  const { data } = await api.get(`/widget/itemDemand/${name}`);
   console.log(data);
   const costs = new Array<cost>(6);
   let total = {
@@ -78,7 +78,8 @@ async function query(name: string): Promise<itemCost> {
     mastery: 0,
     total: 0,
   };
-  (data as Array<costProps>).forEach((v) => {
+  Object.keys(data as resp).forEach((key) => {
+    const v = data[key] as costProps;
     const cost = costs[v.rarity] || { label: `${v.rarity + 1}星`, data: [] };
     cost.data.push(v);
     costs[v.rarity] = cost;
@@ -88,24 +89,31 @@ async function query(name: string): Promise<itemCost> {
   });
   total.total = total.elite + total.skill + total.mastery;
   return {
-    costs: costs.filter((v) => v),
+    costs: costs.filter((v) => v).reverse(), // 让六星排到前面
     total,
   };
 }
 interface props {
   item: string;
 }
+enum Status{
+  req,
+  fail,
+  succ
+}
 export function ItemDemand({ item }: props) {
   const [data, setData] = useState<itemCost>();
-  const [fail, setFail] = useState(false);
+  const [status, setStatus] = useState<Status>(Status.req);
   const init = async () => {
     try {
+      setStatus(Status.req);
       const cost = await query(item);
       console.log(cost);
       setData(cost);
+      setStatus(Status.succ);
     } catch (err) {
       console.log(err);
-      setFail(true);
+      setStatus(Status.fail);
     }
   };
   useEffect(() => {
@@ -114,8 +122,8 @@ export function ItemDemand({ item }: props) {
   const [selected, setSelected] = useState(0);
   return (
     <>
-      <div class="max-w-700px  p-8px bg-paper box-border">
-        {fail ? (
+      <div class="max-w-700px box-border">
+        {status == Status.fail ? (
           <div
             class="py-12px px-8px border-primary-main border-1px border-solid w-140px rounded"
             onClick={() => {
@@ -124,7 +132,7 @@ export function ItemDemand({ item }: props) {
           >
             加载失败 点击重试
           </div>
-        ) : data ? (
+        ) : status == Status.succ && data ? (
           <>
             <div>
               <div>精英化：{data.total.elite}</div>
@@ -133,18 +141,17 @@ export function ItemDemand({ item }: props) {
               <div class="font-bold">总计：{data.total.total}</div>
             </div>
             <Tabs
-            // class="z-10"
-              classes="sticky top-0 bg-paper z-10"
+              classes="sticky top-0 bg-paper z-10 bg-table mt-12px"
               labels={data.costs.map((v) => v.label)}
               onChange={(i) => {
                 setSelected(i);
               }}
               selected={selected}
             ></Tabs>
-            <div class="">
+            <div class="mt-12px">
               {data.costs.map((cost, i) => (
                 <div
-                  class={`grid grid-cols-5 <sm:grid-cols-3 border-solid border-l-1px border-divider ${
+                  class={`grid grid-cols-5 <sm:grid-cols-3 ${
                     selected == i ? "" : "hidden"
                   }`}
                 >
@@ -164,9 +171,9 @@ export function ItemDemand({ item }: props) {
           </>
         ) : (
           <>
-            <Skeleton classes="w-100px h-30px" />
-            <Skeleton classes="w-100px h-30px" />
-            <Skeleton classes="w-100px h-30px" />
+            <Skeleton classes="w-120px h-30px my-8px" />
+            <Skeleton classes="w-120px h-30px my-8px" />
+            <Skeleton classes="w-120px h-30px my-8px" />
             <Skeleton classes="w-full h-200px" />
           </>
         )}

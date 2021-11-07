@@ -1,13 +1,12 @@
-import axios from "axios";
 import MD5 from "md5";
+import fly from "flyio";
 export function getImagePath(filename: string) {
   const md5 = MD5(filename);
   return `${md5.slice(0, 1)}/${md5.slice(0, 2)}/${filename}`;
 }
-export const api = axios.create({
-  timeout: 5000,
-  baseURL:'https://api.prts.wiki/v1'
-});
+
+fly.config.baseURL = 'https://api.prts.wiki'
+export const api = fly;
 
 export const professionMap = {
   PIONEER: "先锋",
