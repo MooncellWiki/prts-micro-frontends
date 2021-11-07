@@ -1,9 +1,8 @@
 import { Avatar } from "./components/avatar";
-import { Divider } from "./components/divider";
 import { Tabs } from "./components/tabs";
 import { useEffect, useState } from "preact/hooks";
 import { Skeleton } from "./components/skeleton/skeleton";
-import { api, professionMap } from "./utils";
+import { api, professionMap, sum } from "./utils";
 interface costProps {
   rarity: number;
   name: string;
@@ -12,14 +11,7 @@ interface costProps {
   skill: number; //技能1-7
   mastery: [number, number, number]; //技能专精
 }
-function Cost({
-  rarity,
-  name,
-  profession,
-  elite,
-  skill,
-  mastery: [mastery1, mastery2, mastery3],
-}: costProps) {
+function Cost({ rarity, name, profession, elite, skill, mastery }: costProps) {
   return (
     <div class="flex flex-col justify-center items-center my-8px ">
       <Avatar rarity={rarity} name={name} profession={profession} size={60} />
@@ -35,18 +27,12 @@ function Cost({
           {skill}
         </span>
       </div>
-      <div
-        class={`${mastery1 + mastery2 + mastery3 === 0 ? "text-disabled" : ""}`}
-      >
+      <div class={`${sum(mastery) === 0 ? "text-disabled" : ""}`}>
         技能专精：
         <span
-          class={`${
-            mastery1 + mastery2 + mastery3 !== 0 ? "text-primary-main" : ""
-          }  font-bold`}
+          class={`${sum(mastery) !== 0 ? "text-primary-main" : ""}  font-bold`}
         >
-          {mastery1 + mastery2 + mastery3 === 0
-            ? 0
-            : `${mastery1}/${mastery2}/${mastery3}`}
+          {sum(mastery) === 0 ? 0 : `${mastery.join("/")}`}
         </span>
       </div>
     </div>
@@ -96,10 +82,10 @@ async function query(name: string): Promise<itemCost> {
 interface props {
   item: string;
 }
-enum Status{
+enum Status {
   req,
   fail,
-  succ
+  succ,
 }
 export function ItemDemand({ item }: props) {
   const [data, setData] = useState<itemCost>();

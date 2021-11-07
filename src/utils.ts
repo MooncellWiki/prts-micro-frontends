@@ -18,3 +18,6 @@ export const professionMap = {
   MEDIC: "医疗",
   TANK: "重装",
 };
+export function sum(arr: Array<number>) {
+  return arr.reduce((acc, cur) => acc + cur, 0);
+}
