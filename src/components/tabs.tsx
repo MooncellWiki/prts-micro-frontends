@@ -9,7 +9,7 @@ export function Tab({ selected, label, onChange }: tabProps) {
   return (
     <div class="max-w-360px flex-grow" onClick={onChange}>
       <div
-        class={`text-center py-12px px-8px ${
+        class={`text-center py-12px px-8px hover:(bg-primary-main text-paper) ${
           selected ? "text-primary-main" : ""
         }`}
       >
@@ -28,7 +28,7 @@ interface tabsProps {
 export function Tabs({ labels, onChange, selected, classes }: tabsProps) {
   return (
     <>
-      <div class={`flex ${classes}`}>
+      <div class={`flex cursor-pointer ${classes}`}>
         {labels.map((v, i) => (
           <Tab
             key={v}
