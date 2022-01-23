@@ -4,20 +4,13 @@
   "scripts": {
     "build": "pnpm run build --filter \"{packages/}\"",
     "lint:fix": "pnpm run lint:fix --filter \"{packages/}\"",
-    "lint:format": "pnpm run lint:format --filter \"{packages/}\"",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "commit": "git-cz"
   },
   "dependencies": {
-    "flyio": "^0.6.14",
-    "md5": "^2.3.0",
-    "preact": "^10.5.13"
   },
   "devDependencies": {
-    "@babel/core": ">=7.12.10 <8.0.0",
-    "@preact/preset-vite": "^2.0.0",
-    "@types/md5": "^2.3.1",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "commitizen": "^4.2.4",
@@ -32,10 +25,7 @@
     "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "source-map-explorer": "^2.5.2",
-    "typescript": "^4.3.2",
-    "vite": "^2.6.4",
-    "vite-plugin-windicss": "^1.4.12",
-    "windicss": "^3.2.0"
+    "typescript": "^4.3.2"
   },
   "config": {
     "commitizen": {
@@ -50,7 +40,6 @@
   "lint-staged": {
     "*.{js,tsx}": [
       "pnpm run lint:fix",
-      "pnpm run lint:format",
       "git add"
     ]
   }

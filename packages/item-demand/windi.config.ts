@@ -11,8 +11,8 @@ export default defineConfig({
       table: "#eaebee",
     },
   },
-  shortcuts:{
-    img:'border-solid block align-middle max-w-full h-auto'
+  shortcuts: {
+    img: "border-solid block align-middle max-w-full h-auto",
   },
-  preflight: false
+  preflight: false,
 });
