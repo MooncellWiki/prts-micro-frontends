@@ -6,7 +6,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "preact"
+    "preact",
+    "plugin:prettier/recommended"
   ],
   "plugins": [
     "@typescript-eslint"

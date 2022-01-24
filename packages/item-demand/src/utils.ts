@@ -5,7 +5,7 @@ export function getImagePath(filename: string) {
   return `${md5.slice(0, 1)}/${md5.slice(0, 2)}/${filename}`;
 }
 
-fly.config.baseURL = 'https://api.prts.wiki'
+fly.config.baseURL = "https://api.prts.wiki";
 export const api = fly;
 
 export const professionMap = {
