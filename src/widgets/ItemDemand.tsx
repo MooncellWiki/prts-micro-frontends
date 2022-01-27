@@ -1,8 +1,8 @@
-import { Avatar } from "./components/avatar";
-import { Tabs } from "./components/tabs";
+import { Avatar } from "../components/avatar";
+import { Tabs } from "../components/tabs";
 import { useEffect, useState } from "preact/hooks";
-import { Skeleton } from "./components/skeleton/skeleton";
-import { api, professionMap, sum } from "./utils";
+import { Skeleton } from "../components/skeleton/skeleton";
+import { api, professionMap, sum } from "../utils/utils";
 interface costProps {
   rarity: number;
   name: string;

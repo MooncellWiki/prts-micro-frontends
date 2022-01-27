@@ -2,13 +2,19 @@
   "name": "prts-micro-frontends",
   "version": "0.0.0",
   "scripts": {
-    "build": "pnpm run build --filter \"{packages/}\"",
-    "lint:fix": "pnpm run lint:fix --filter \"{packages/}\"",
+    "dev": "vite",
+    "build": "tsc && vite -l info build",
+    "serve": "vite preview",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path .gitignore",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "commit": "git-cz"
   },
-  "dependencies": {},
+  "dependencies": {
+    "flyio": "^0.6.14",
+    "md5": "^2.3.0",
+    "preact": "^10.6.4"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
@@ -24,7 +30,13 @@
     "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "source-map-explorer": "^2.5.2",
-    "typescript": "^4.3.2"
+    "typescript": "<4.5.0",
+    "@babel/core": ">=7.12.10 <8.0.0",
+    "@preact/preset-vite": "^2.1.7",
+    "@types/md5": "^2.3.1",
+    "vite": "^2.7.13",
+    "vite-plugin-windicss": "^1.6.3",
+    "windicss": "^3.4.3"
   },
   "config": {
     "commitizen": {
