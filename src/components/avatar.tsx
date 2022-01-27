@@ -1,4 +1,4 @@
-import { getImagePath, professionMap } from "../utils";
+import { getImagePath, professionMap } from "../utils/utils";
 
 export function Avatar({
   size = 100,
