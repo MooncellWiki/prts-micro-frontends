@@ -9,6 +9,7 @@ export default defineConfig({
       paper: "#f8f8f8",
       "primary-main": "#6a6aff",
       table: "#eaebee",
+      wikitable: "#f8f9fa",
     },
   },
   shortcuts: {
