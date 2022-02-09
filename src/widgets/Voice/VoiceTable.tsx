@@ -33,7 +33,7 @@ export function Voice({
   const [childKey, setChildKey] = useState(1);
   useEffect(() => {
     setChildKey((prev) => prev + 1);
-  }, [selectedWordLang]);
+  }, [selectedWordLang, selectedVoiceLang]);
   return (
     <div>
       <h2>
