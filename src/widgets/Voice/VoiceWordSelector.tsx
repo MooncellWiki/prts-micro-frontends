@@ -1,4 +1,4 @@
-import { StateUpdater, useState } from "preact/hooks";
+import { StateUpdater } from "preact/hooks";
 
 interface props {
   langSet: Set<string>;

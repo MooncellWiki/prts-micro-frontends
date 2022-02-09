@@ -1,5 +1,5 @@
 import ReactAudioPlayer from "../../components/player";
-import { useEffect, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import { createRef } from "preact";
 
 enum playerStatus {
