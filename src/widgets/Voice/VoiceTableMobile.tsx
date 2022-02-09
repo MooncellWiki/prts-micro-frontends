@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { VoiceLangSelector } from "./VoiceLangSelector";
+import { VoiceWordSelector } from "./VoiceWordSelector";
 import { VoicePlayer } from "./VoicePlayer";
 
 interface props {
@@ -36,7 +36,7 @@ export function VoiceMobile({
       <h2>
         <span class="mw-headline">{tocTitle}</span>
       </h2>
-      <VoiceLangSelector
+      <VoiceWordSelector
         langSet={langSet}
         selected={selectedWordLang}
         onChange={setSelectedWordLang}
@@ -63,7 +63,7 @@ export function VoiceMobile({
                   key={childKey}
                   voiceId={`${voiceKey}/${ele?.title}`}
                   voicePath={`${
-                    voiceBase[Array.from(langSet).at(selected) || "中文"]
+                    voiceBase[Array.from(langSet).at(0) || "中文"]
                   }/${ele?.voiceFilename?.replaceAll(" ", "_")}`}
                 />
               </div>

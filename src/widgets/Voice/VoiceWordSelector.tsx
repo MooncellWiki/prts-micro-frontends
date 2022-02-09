@@ -6,7 +6,7 @@ interface props {
   onChange: StateUpdater<number[]>;
 }
 
-export function VoiceLangSelector({ langSet, selected, onChange }: props) {
+export function VoiceWordSelector({ langSet, selected, onChange }: props) {
   return (
     <div class="flex justify-start my-1 text-white text-sm text-center font-bold leading-6">
       {Array.from(langSet).map((v, i) => (
@@ -21,9 +21,7 @@ export function VoiceLangSelector({ langSet, selected, onChange }: props) {
           onClick={() => {
             onChange(
               selected.indexOf(i) !== -1
-                ? selected.filter((v) => {
-                    return v !== i;
-                  })
+                ? selected.filter((v) => v !== i)
                 : [...selected, i]
             );
           }}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { VoiceLangSelector } from "./VoiceLangSelector";
+import { VoiceWordSelector } from "./VoiceWordSelector";
 import { VoicePlayer } from "./VoicePlayer";
 
 interface props {
@@ -36,7 +36,7 @@ export function Voice({
       <h2>
         <span class="mw-headline">{tocTitle}</span>
       </h2>
-      <VoiceLangSelector
+      <VoiceWordSelector
         langSet={langSet}
         selected={selectedWordLang}
         onChange={setSelectedWordLang}
