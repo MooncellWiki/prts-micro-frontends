@@ -21,7 +21,7 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
   const [status, setStatus] = useState<playerStatus>(playerStatus.playing);
   let ref = createRef<ReactAudioPlayer>();
   return (
-    <div class="p-auto">
+    <div class="container">
       <ReactAudioPlayer
         src={`//static.prts.wiki/${voicePath}`}
         id={voiceId}
