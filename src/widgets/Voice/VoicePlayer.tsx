@@ -16,7 +16,7 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
   const [status, setStatus] = useState<playerStatus>(playerStatus.playing);
   let ref = createRef<ReactAudioPlayer>();
   return (
-    <div>
+    <div class="container">
       <ReactAudioPlayer
         src={`//static.prts.wiki/${voicePath}`}
         id={voiceId}
@@ -31,7 +31,7 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
             ? "/images/9/90/Play.png"
             : "/images/4/47/Pause.png"
         }
-        style="width:36px;cursor:pointer;"
+        style="width:50%;cursor:pointer;"
         onClick={() => {
           status == playerStatus.playing
             ? ref.current?.audioEl.current?.play()
@@ -47,7 +47,7 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
         <img
           title="下载"
           src="/images/f/f1/Download.png"
-          style="width:36px;cursor:pointer;"
+          style="width:50%;cursor:pointer;"
         ></img>
       </a>
     </div>

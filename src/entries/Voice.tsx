@@ -1,6 +1,7 @@
 import { render } from "preact";
 import "virtual:windi.css";
 import { Voice } from "../widgets/Voice/VoiceTable";
+import { VoiceMobile } from "../widgets/Voice/VoiceTableMobile";
 
 const ele = document.getElementById("voice-table-root");
 const dataRoot = document.getElementById("voice-data-root");
@@ -9,14 +10,15 @@ const dataEle = dataRoot?.getElementsByClassName(
 ) as HTMLCollectionOf<HTMLElement>;
 
 const langSet = new Set<string>();
-const voiceBase = dataRoot?.dataset?.voiceBase?.split(",").reduce<{
-  [index: string]: string;
-}>((acc, curr) => {
-  let k, v;
-  [k, v] = curr.split(":");
-  acc[k] = v;
-  return acc;
-}, {}) || {};
+const voiceBase =
+  dataRoot?.dataset?.voiceBase?.split(",").reduce<{
+    [index: string]: string;
+  }>((acc, curr) => {
+    let k, v;
+    [k, v] = curr.split(":");
+    acc[k] = v;
+    return acc;
+  }, {}) || {};
 const voiceData = Array.from(dataEle).map((ele) => ({
   title: ele?.dataset?.title,
   index: ele?.dataset?.voiceIndex,
@@ -31,6 +33,11 @@ const voiceData = Array.from(dataEle).map((ele) => ({
     return acc;
   }, {}),
 }));
+const isMobile = document
+  .getElementsByTagName("body")[0]
+  .classList.contains("skin-minerva")
+  ? true
+  : false;
 console.log(voiceData);
 console.log(voiceBase);
 if (
@@ -40,13 +47,23 @@ if (
   voiceData
 ) {
   render(
-    <Voice
-      tocTitle={dataRoot?.dataset?.tocTitle}
-      voiceKey={dataRoot?.dataset?.voiceKey}
-      voiceData={voiceData}
-      langSet={langSet}
-      voiceBase={voiceBase}
-    />,
+    isMobile ? (
+      <VoiceMobile
+        tocTitle={dataRoot?.dataset?.tocTitle}
+        voiceKey={dataRoot?.dataset?.voiceKey}
+        voiceData={voiceData}
+        langSet={langSet}
+        voiceBase={voiceBase}
+      />
+    ) : (
+      <Voice
+        tocTitle={dataRoot?.dataset?.tocTitle}
+        voiceKey={dataRoot?.dataset?.voiceKey}
+        voiceData={voiceData}
+        langSet={langSet}
+        voiceBase={voiceBase}
+      />
+    ),
     ele
   );
 } else {

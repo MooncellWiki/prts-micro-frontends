@@ -19,7 +19,7 @@ interface props {
   };
 }
 
-export function Voice({
+export function VoiceMobile({
   tocTitle,
   voiceKey,
   voiceData,
@@ -41,21 +41,21 @@ export function Voice({
         selected={selected}
         onChange={setSelected}
       />
-      <div class="table bg-wikitable border-collapse max-w-screen-lg border border-solid border-divider rounded shadow overflow-hidden">
-        <div class="table-row-group">
-          {Array.from(voiceData).map((ele) => (
-            <div class="table-row">
-              <div class="table-cell text-center font-bold p-1 !bg-table border border-solid border-divider align-middle truncate">
-                {ele.title}
-              </div>
+      <div class="bg-wikitable border-collapse max-w-full border border-solid border-divider rounded shadow overflow-hidden">
+        {Array.from(voiceData).map((ele) => (
+          <div>
+            <div class="text-center font-bold p-1 !bg-table border border-solid border-divider align-middle truncate">
+              {ele.title}
+            </div>
+            <div class="flex">
               <div
-                class="table-cell p-2 inline-block border border-solid border-divider rounded align-middle"
+                class="w-4/5 p-2 border border-solid border-divider align-middle"
                 dangerouslySetInnerHTML={{
                   __html:
                     ele.detail[Array.from(langSet).at(selected) || "中文"],
                 }}
               />
-              <div class="table-cell p-1 border border-solid border-divider rounded align-middle truncate">
+              <div class="w-1/5 p-2 border border-solid border-divider align-middle truncate">
                 <VoicePlayer
                   key={childKey}
                   voiceId={voiceKey + "/" + ele?.title}
@@ -65,8 +65,8 @@ export function Voice({
                 />
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
