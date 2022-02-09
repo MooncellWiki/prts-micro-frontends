@@ -4,6 +4,7 @@ import { VoicePlayer } from "./VoicePlayer";
 import { VoiceFileSelector } from "./VoiceFileSelector";
 
 interface props {
+  tocTitle: string;
   voiceKey: string;
   voiceData: {
     title?: string;
@@ -21,6 +22,7 @@ interface props {
 }
 
 export function Voice({
+  tocTitle,
   voiceKey,
   voiceData,
   langSet,
@@ -34,6 +36,9 @@ export function Voice({
   }, [selectedVoiceLang]);
   return (
     <div>
+      <h2>
+        <span class="mw-headline">{tocTitle}</span>
+      </h2>
       <VoiceWordSelector
         langSet={langSet}
         selected={selectedWordLang}
