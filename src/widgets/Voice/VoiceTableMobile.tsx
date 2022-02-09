@@ -4,7 +4,6 @@ import { VoicePlayer } from "./VoicePlayer";
 import { VoiceFileSelector } from "./VoiceFileSelector";
 
 interface props {
-  tocTitle: string;
   voiceKey: string;
   voiceData: {
     title?: string;
@@ -22,7 +21,6 @@ interface props {
 }
 
 export function VoiceMobile({
-  tocTitle,
   voiceKey,
   voiceData,
   langSet,
@@ -36,9 +34,6 @@ export function VoiceMobile({
   }, [selectedWordLang]);
   return (
     <div>
-      <h2>
-        <span class="mw-headline">{tocTitle}</span>
-      </h2>
       <VoiceWordSelector
         langSet={langSet}
         selected={selectedWordLang}

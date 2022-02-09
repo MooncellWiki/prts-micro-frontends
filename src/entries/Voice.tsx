@@ -43,14 +43,12 @@ console.log(voiceData);
 console.log(voiceBase);
 if (
   ele &&
-  dataRoot?.dataset?.tocTitle &&
   dataRoot?.dataset?.voiceKey &&
   voiceData
 ) {
   render(
     isMobile ? (
       <VoiceMobile
-        tocTitle={dataRoot?.dataset?.tocTitle}
         voiceKey={dataRoot?.dataset?.voiceKey}
         voiceData={voiceData}
         langSet={langSet}
@@ -58,7 +56,6 @@ if (
       />
     ) : (
       <Voice
-        tocTitle={dataRoot?.dataset?.tocTitle}
         voiceKey={dataRoot?.dataset?.voiceKey}
         voiceData={voiceData}
         langSet={langSet}
