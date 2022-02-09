@@ -1,48 +1,50 @@
-import React, { Component, ReactNode, CSSProperties } from 'react';
-import PropTypes from 'prop-types';
+import { createRef, Component } from "preact";
+import ReactNode = preact.ComponentChildren;
+type CSSProperties = string | { [key: string]: string | number };
+import PropTypes from "prop-types";
 
 interface ReactAudioPlayerProps {
-  autoPlay?: boolean
-  children?: ReactNode
-  className?: string
-  controls?: boolean
-  controlsList?: string
-  crossOrigin?: string
-  id?: string
-  listenInterval?: number
-  loop?: boolean
-  muted?: boolean
-  onAbort?: (e: Event) => void
-  onCanPlay?: (e: Event) => void
-  onCanPlayThrough?: (e: Event) => void
-  onEnded?: (e: Event) => void
-  onError?: (e: Event) => void
-  onListen?: (time: number) => void
-  onLoadedMetadata?: (e: Event) => void
-  onPause?: (e: Event) => void
-  onPlay?: (e: Event) => void
-  onSeeked?: (e: Event) => void
-  onVolumeChanged?: (e: Event) => void
-  preload?: '' | 'none' | 'metadata' | 'auto'
-  src?: string, // Not required b/c can use <source>
-  style?: CSSProperties
-  title?: string
-  volume: number
+  autoPlay?: boolean;
+  children?: ReactNode;
+  className?: string;
+  controls?: boolean;
+  controlsList?: string;
+  crossOrigin?: string;
+  id?: string;
+  listenInterval?: number;
+  loop?: boolean;
+  muted?: boolean;
+  onAbort?: (e: Event) => void;
+  onCanPlay?: (e: Event) => void;
+  onCanPlayThrough?: (e: Event) => void;
+  onEnded?: (e: Event) => void;
+  onError?: (e: Event) => void;
+  onListen?: (time: number) => void;
+  onLoadedMetadata?: (e: Event) => void;
+  onPause?: (e: Event) => void;
+  onPlay?: (e: Event) => void;
+  onSeeked?: (e: Event) => void;
+  onVolumeChanged?: (e: Event) => void;
+  preload?: "" | "none" | "metadata" | "auto";
+  src?: string; // Not required b/c can use <source>
+  style?: CSSProperties;
+  title?: string;
+  volume: number;
 }
 
 interface ConditionalProps {
-  controlsList?: string
-  [key: string]: any
+  controlsList?: string;
+  [key: string]: any;
 }
 
 class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
-  static propTypes: Object
+  static propTypes: Object;
 
-  static defaultProps: ReactAudioPlayerProps
+  static defaultProps: ReactAudioPlayerProps;
 
-  audioEl = React.createRef<HTMLAudioElement>();
+  audioEl = createRef<HTMLAudioElement>();
 
-  listenTracker?: number
+  listenTracker?: number;
 
   onError = (e: Event) => this.props.onError?.(e);
   onCanPlay = (e: Event) => this.props.onCanPlay?.(e);
@@ -50,28 +52,28 @@ class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
   onPlay = (e: Event) => {
     this.setListenTrack();
     this.props.onPlay?.(e);
-  }
+  };
   onAbort = (e: Event) => {
     this.clearListenTrack();
     this.props.onAbort?.(e);
-  }
+  };
   onEnded = (e: Event) => {
     this.clearListenTrack();
     this.props.onEnded?.(e);
-  }
+  };
   onPause = (e: Event) => {
     this.clearListenTrack();
     this.props.onPause?.(e);
-  }
+  };
   onSeeked = (e: Event) => {
     this.props.onSeeked?.(e);
-  }
+  };
   onLoadedMetadata = (e: Event) => {
     this.props.onLoadedMetadata?.(e);
-  }
+  };
   onVolumeChanged = (e: Event) => {
     this.props.onVolumeChanged?.(e);
-  }
+  };
 
   componentDidMount() {
     const audio = this.audioEl.current;
@@ -80,32 +82,32 @@ class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
 
     this.updateVolume(this.props.volume);
 
-    audio.addEventListener('error', this.onError);
+    audio.addEventListener("error", this.onError);
 
     // When enough of the file has downloaded to start playing
-    audio.addEventListener('canplay', this.onCanPlay);
+    audio.addEventListener("canplay", this.onCanPlay);
 
     // When enough of the file has downloaded to play the entire file
-    audio.addEventListener('canplaythrough', this.onCanPlayThrough);
+    audio.addEventListener("canplaythrough", this.onCanPlayThrough);
 
     // When audio play starts
-    audio.addEventListener('play', this.onPlay);
+    audio.addEventListener("play", this.onPlay);
 
     // When unloading the audio player (switching to another src)
-    audio.addEventListener('abort', this.onAbort);
+    audio.addEventListener("abort", this.onAbort);
 
     // When the file has finished playing to the end
-    audio.addEventListener('ended', this.onEnded);
+    audio.addEventListener("ended", this.onEnded);
 
     // When the user pauses playback
-    audio.addEventListener('pause', this.onPause);
+    audio.addEventListener("pause", this.onPause);
 
     // When the user drags the time indicator to a new time
-    audio.addEventListener('seeked', this.onSeeked);
+    audio.addEventListener("seeked", this.onSeeked);
 
-    audio.addEventListener('loadedmetadata', this.onLoadedMetadata);
+    audio.addEventListener("loadedmetadata", this.onLoadedMetadata);
 
-    audio.addEventListener('volumechange', this.onVolumeChanged);
+    audio.addEventListener("volumechange", this.onVolumeChanged);
   }
 
   // Remove all event listeners
@@ -114,32 +116,32 @@ class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
 
     if (!audio) return;
 
-    audio.removeEventListener('error', this.onError);
+    audio.removeEventListener("error", this.onError);
 
     // When enough of the file has downloaded to start playing
-    audio.removeEventListener('canplay', this.onCanPlay);
+    audio.removeEventListener("canplay", this.onCanPlay);
 
     // When enough of the file has downloaded to play the entire file
-    audio.removeEventListener('canplaythrough', this.onCanPlayThrough);
+    audio.removeEventListener("canplaythrough", this.onCanPlayThrough);
 
     // When audio play starts
-    audio.removeEventListener('play', this.onPlay);
+    audio.removeEventListener("play", this.onPlay);
 
     // When unloading the audio player (switching to another src)
-    audio.removeEventListener('abort', this.onAbort);
+    audio.removeEventListener("abort", this.onAbort);
 
     // When the file has finished playing to the end
-    audio.removeEventListener('ended', this.onEnded);
+    audio.removeEventListener("ended", this.onEnded);
 
     // When the user pauses playback
-    audio.removeEventListener('pause', this.onPause);
+    audio.removeEventListener("pause", this.onPause);
 
     // When the user drags the time indicator to a new time
-    audio.removeEventListener('seeked', this.onSeeked);
+    audio.removeEventListener("seeked", this.onSeeked);
 
-    audio.removeEventListener('loadedmetadata', this.onLoadedMetadata);
+    audio.removeEventListener("loadedmetadata", this.onLoadedMetadata);
 
-    audio.removeEventListener('volumechange', this.onVolumeChanged);
+    audio.removeEventListener("volumechange", this.onVolumeChanged);
   }
 
   componentDidUpdate(prevProps: ReactAudioPlayerProps) {
@@ -153,7 +155,8 @@ class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
     if (!this.listenTracker) {
       const listenInterval = this.props.listenInterval;
       this.listenTracker = window.setInterval(() => {
-        this.audioEl.current && this.props.onListen?.(this.audioEl.current.currentTime);
+        this.audioEl.current &&
+          this.props.onListen?.(this.audioEl.current.currentTime);
       }, listenInterval);
     }
   }
@@ -164,7 +167,11 @@ class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
    */
   updateVolume(volume: number) {
     const audio = this.audioEl.current;
-    if (audio !== null && typeof volume === 'number' && volume !== audio?.volume) {
+    if (
+      audio !== null &&
+      typeof volume === "number" &&
+      volume !== audio?.volume
+    ) {
       audio.volume = volume;
     }
   }
@@ -181,7 +188,9 @@ class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
 
   render() {
     const incompatibilityMessage = this.props.children || (
-      <p>Your browser does not support the <code>audio</code> element.</p>
+      <p>
+        Your browser does not support the <code>audio</code> element.
+      </p>
     );
 
     // Set controls to be true by default unless explicity stated otherwise
@@ -221,10 +230,10 @@ class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {
 ReactAudioPlayer.defaultProps = {
   autoPlay: false,
   children: null,
-  className: '',
+  className: "",
   controls: false,
-  controlsList: '',
-  id: '',
+  controlsList: "",
+  id: "",
   listenInterval: 10000,
   loop: false,
   muted: false,
@@ -239,9 +248,9 @@ ReactAudioPlayer.defaultProps = {
   onSeeked: () => {},
   onVolumeChanged: () => {},
   onLoadedMetadata: () => {},
-  preload: 'metadata',
+  preload: "metadata",
   style: {},
-  title: '',
+  title: "",
   volume: 1.0,
 };
 
@@ -267,7 +276,7 @@ ReactAudioPlayer.propTypes = {
   onPlay: PropTypes.func,
   onSeeked: PropTypes.func,
   onVolumeChanged: PropTypes.func,
-  preload: PropTypes.oneOf(['', 'none', 'metadata', 'auto']),
+  preload: PropTypes.oneOf(["", "none", "metadata", "auto"]),
   src: PropTypes.string, // Not required b/c can use <source>
   style: PropTypes.objectOf(PropTypes.string),
   title: PropTypes.string,

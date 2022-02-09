@@ -4,9 +4,35 @@ import { Voice } from "../widgets/Voice/VoiceTable";
 
 const ele = document.getElementById("voice-table-root");
 const dataRoot = document.getElementById("voice-data-root");
-const voiceData = dataRoot?.getElementsByClassName(
+const dataEle = dataRoot?.getElementsByClassName(
   "voice-data-item"
 ) as HTMLCollectionOf<HTMLElement>;
+
+const langSet = new Set<string>();
+const voiceBase = dataRoot?.dataset?.voiceBase?.split(",").reduce<{
+  [index: string]: string;
+}>((acc, curr) => {
+  let k, v;
+  [k, v] = curr.split(":");
+  acc[k] = v;
+  return acc;
+}, {}) || {};
+const voiceData = Array.from(dataEle).map((ele) => ({
+  title: ele?.dataset?.title,
+  index: ele?.dataset?.voiceIndex,
+  voiceFilename: ele?.dataset?.voiceFilename,
+  detail: Array.from(ele.children as HTMLCollectionOf<HTMLElement>).reduce<{
+    [index: string]: string;
+  }>((acc, curr) => {
+    if (curr.dataset?.kindName !== undefined) {
+      acc[curr.dataset.kindName] = curr.innerHTML;
+      langSet.add(curr.dataset.kindName);
+    }
+    return acc;
+  }, {}),
+}));
+console.log(voiceData);
+console.log(voiceBase);
 if (
   ele &&
   dataRoot?.dataset?.tocTitle &&
@@ -18,6 +44,8 @@ if (
       tocTitle={dataRoot?.dataset?.tocTitle}
       voiceKey={dataRoot?.dataset?.voiceKey}
       voiceData={voiceData}
+      langSet={langSet}
+      voiceBase={voiceBase}
     />,
     ele
   );

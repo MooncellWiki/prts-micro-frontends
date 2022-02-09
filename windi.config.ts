@@ -1,4 +1,5 @@
 import { defineConfig } from "vite-plugin-windicss";
+import colors from "windicss/colors";
 
 export default defineConfig({
   theme: {
@@ -10,6 +11,9 @@ export default defineConfig({
       "primary-main": "#6a6aff",
       table: "#eaebee",
       wikitable: "#f8f9fa",
+      "ooui-primary": "#2a4b8d",
+      white: colors.white,
+      black: colors.black,
     },
   },
   shortcuts: {
