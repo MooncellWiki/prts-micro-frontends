@@ -30,23 +30,47 @@ export function Voice({
 }: props) {
   const [selectedWordLang, setSelectedWordLang] = useState([0]);
   const [selectedVoiceLang, setSelectedVoiceLang] = useState(0);
+  const isSimplified =
+    decodeURIComponent(window.location.href).indexOf("/语音") !== -1
+      ? false
+      : true;
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [childKey, setChildKey] = useState(1);
   useEffect(() => {
     setChildKey((prev) => prev + 1);
   }, [selectedVoiceLang]);
   return (
-    <div>
-      <VoiceWordSelector
-        langSet={langSet}
-        selected={selectedWordLang}
-        onChange={setSelectedWordLang}
-      />
-      <VoiceFileSelector
-        langSet={langSet}
-        selected={selectedVoiceLang}
-        onChange={setSelectedVoiceLang}
-      />
-      <div class="table bg-wikitable border-collapse max-w-screen-lg border border-solid border-divider rounded shadow overflow-hidden">
+    <div class="max-w-screen-lg">
+      <div class={isSimplified ? "hidden" : ""}>
+        <VoiceWordSelector
+          langSet={langSet}
+          selected={selectedWordLang}
+          onChange={setSelectedWordLang}
+        />
+        <VoiceFileSelector
+          langSet={langSet}
+          selected={selectedVoiceLang}
+          onChange={setSelectedVoiceLang}
+        />
+      </div>
+      {isSimplified && (
+        <div class="p-1 text-center font-bold !bg-table border border-solid border-divider rounded shadow overflow-hidden">
+          <span class="">{tocTitle}</span>
+          <a
+            class="float-right z-1 select-none"
+            onClick={() => {
+              setIsCollapsed(!isCollapsed);
+            }}
+          >
+            {isCollapsed ? "展开" : "折叠"}
+          </a>
+        </div>
+      )}
+      <div
+        class={`${
+          isSimplified && isCollapsed ? "hidden" : ""
+        } table bg-wikitable border-collapse border border-solid border-divider rounded shadow overflow-hidden`}
+      >
         <div class="table-row-group">
           {Array.from(voiceData).map((ele) => (
             <div class="table-row">
@@ -66,7 +90,7 @@ export function Voice({
                   </p>
                 ))}
               </div>
-              <div class="table-cell w-20 p-1 border border-solid border-divider rounded align-middle truncate">
+              <div class="table-cell p-1 border border-solid border-divider rounded align-middle truncate">
                 <VoicePlayer
                   key={childKey}
                   voiceId={voiceKey + "/" + ele?.title}
