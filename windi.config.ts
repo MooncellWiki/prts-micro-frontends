@@ -14,6 +14,8 @@ export default defineConfig({
       "ooui-primary": "#2a4b8d",
       white: colors.white,
       black: colors.black,
+      gray: colors.gray,
+      blue: colors.blue,
     },
   },
   shortcuts: {

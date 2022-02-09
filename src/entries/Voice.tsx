@@ -23,6 +23,7 @@ const voiceData = Array.from(dataEle).map((ele) => ({
   title: ele?.dataset?.title,
   index: ele?.dataset?.voiceIndex,
   voiceFilename: ele?.dataset?.voiceFilename,
+  cond: ele?.dataset?.cond,
   detail: Array.from(ele.children as HTMLCollectionOf<HTMLElement>).reduce<{
     [index: string]: string;
   }>((acc, curr) => {
