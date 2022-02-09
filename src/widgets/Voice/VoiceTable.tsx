@@ -36,9 +36,6 @@ export function Voice({
   }, [selectedVoiceLang]);
   return (
     <div>
-      <h2>
-        <span class="mw-headline">{tocTitle}</span>
-      </h2>
       <VoiceWordSelector
         langSet={langSet}
         selected={selectedWordLang}
