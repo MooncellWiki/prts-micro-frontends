@@ -2,8 +2,8 @@ import { StateUpdater, useState } from "preact/hooks";
 
 interface props {
   langSet: Set<string>;
-  selected: number;
-  onChange: StateUpdater<number>;
+  selected: number[];
+  onChange: StateUpdater<number[]>;
 }
 
 export function VoiceLangSelector({ langSet, selected, onChange }: props) {
@@ -13,10 +13,20 @@ export function VoiceLangSelector({ langSet, selected, onChange }: props) {
         <div
           key={i}
           class={`px-4 py-2 font-semibold text-sm ${
-            selected == i ? "bg-ooui-primary text-white" : "bg-white text-black"
+            selected.indexOf(i) !== -1
+              ? "bg-ooui-primary text-white"
+              : "bg-white text-black"
           } border border-solid border-divider rounded-none shadow-sm`}
           style="appearance:button;cursor:pointer;font-family:inherit;"
-          onClick={() => onChange(i)}
+          onClick={() => {
+            onChange(
+              selected.indexOf(i) !== -1
+                ? selected.filter((v) => {
+                    return v !== i;
+                  })
+                : [...selected, i]
+            );
+          }}
         >
           {v}
         </div>

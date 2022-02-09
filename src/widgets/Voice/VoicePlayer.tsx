@@ -20,6 +20,7 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
       <ReactAudioPlayer
         src={`//static.prts.wiki/${voicePath}`}
         id={voiceId}
+        preload="none"
         title={voiceId}
         ref={ref}
         onEnded={(e) => setStatus(playerStatus.playing)}

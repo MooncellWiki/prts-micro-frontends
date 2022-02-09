@@ -6,9 +6,9 @@ interface props {
   tocTitle: string;
   voiceKey: string;
   voiceData: {
-    title: string | undefined;
-    index: string | undefined;
-    voiceFilename: string | undefined;
+    title?: string;
+    index?: string;
+    voiceFilename?: string;
     detail: {
       [index: string]: string;
     };
@@ -26,11 +26,11 @@ export function Voice({
   langSet,
   voiceBase,
 }: props) {
-  const [selected, setSelected] = useState(0);
+  const [selectedWordLang, setSelectedWordLang] = useState([0]);
   const [childKey, setChildKey] = useState(1);
   useEffect(() => {
     setChildKey((prev) => prev + 1);
-  }, [selected]);
+  }, [selectedWordLang]);
   return (
     <div>
       <h2>
@@ -38,8 +38,8 @@ export function Voice({
       </h2>
       <VoiceLangSelector
         langSet={langSet}
-        selected={selected}
-        onChange={setSelected}
+        selected={selectedWordLang}
+        onChange={setSelectedWordLang}
       />
       <div class="table bg-wikitable border-collapse max-w-screen-lg border border-solid border-divider rounded shadow overflow-hidden">
         <div class="table-row-group">
@@ -48,20 +48,23 @@ export function Voice({
               <div class="table-cell text-center font-bold p-1 !bg-table border border-solid border-divider align-middle truncate">
                 {ele.title}
               </div>
-              <div
-                class="table-cell p-2 inline-block border border-solid border-divider rounded align-middle"
-                dangerouslySetInnerHTML={{
-                  __html:
-                    ele.detail[Array.from(langSet).at(selected) || "中文"],
-                }}
-              />
+              <div class="table-cell p-2 inline-block border border-solid border-divider rounded align-middle">
+                {selectedWordLang.map((v) => (
+                  <p
+                    lang={Array.from(langSet).at(v) == "日文" ? "ja" : ""}
+                    dangerouslySetInnerHTML={{
+                      __html: ele.detail[Array.from(langSet).at(v) || "中文"],
+                    }}
+                  ></p>
+                ))}
+              </div>
               <div class="table-cell p-1 border border-solid border-divider rounded align-middle truncate">
                 <VoicePlayer
                   key={childKey}
                   voiceId={voiceKey + "/" + ele?.title}
                   voicePath={`${
-                    voiceBase[Array.from(langSet).at(selected) || "中文"]
-                  }/${ele?.voiceFilename?.replace(" ", "_")}`}
+                    voiceBase[Array.from(langSet).at(0) || "中文"]
+                  }/${ele?.voiceFilename?.replaceAll(" ", "_")}`}
                 />
               </div>
             </div>
