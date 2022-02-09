@@ -44,7 +44,10 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
           );
         }}
       ></img>
-      <a href={`//static.prts.wiki/${voicePath}`} download>
+      <a
+        href={`//static.prts.wiki/${voicePath}`}
+        download={voicePath.split("/").at(-1)}
+      >
         <img
           title="下载"
           src="/images/f/f1/Download.png"
