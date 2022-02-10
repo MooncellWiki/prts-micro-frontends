@@ -30,14 +30,14 @@ export function Voice({
   voiceBase,
 }: props) {
   const [selectedWordLang, setSelectedWordLang] = useState([0]);
-  const [selectedVoiceLang, setSelectedVoiceLang] = useState(0);
+  const [selectedVoicePath, setSelectedVoicePath] = useState("");
   const isSimplified =
     decodeURIComponent(window.location.href).indexOf("/语音") === -1;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [childKey, setChildKey] = useState(1);
   useEffect(() => {
     setChildKey((prev) => prev + 1);
-  }, [selectedVoiceLang]);
+  }, [selectedVoicePath]);
   return (
     <div class="max-w-screen-lg">
       <div class={isSimplified ? "hidden" : ""}>
@@ -46,7 +46,10 @@ export function Voice({
           selected={selectedWordLang}
           onChange={setSelectedWordLang}
         />
-        <VoiceFileSelector langSet={langSet} onChange={setSelectedVoiceLang} />
+        <VoiceFileSelector
+          voiceBase={voiceBase}
+          onChange={setSelectedVoicePath}
+        />
       </div>
       {isSimplified && (
         <div class="p-1 text-center font-bold !bg-table border border-solid border-divider rounded shadow overflow-hidden">
@@ -89,11 +92,10 @@ export function Voice({
                 <VoicePlayer
                   key={childKey}
                   voiceId={`${voiceKey}/${ele?.title}`}
-                  voicePath={`${
-                    voiceBase[
-                      Array.from(langSet).at(selectedVoiceLang) || "中文"
-                    ]
-                  }/${ele?.voiceFilename?.replaceAll(" ", "_")}`}
+                  voicePath={`${selectedVoicePath}/${ele?.voiceFilename?.replaceAll(
+                    " ",
+                    "_"
+                  )}`}
                 />
               </div>
             </div>
