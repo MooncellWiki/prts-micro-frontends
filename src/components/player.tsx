@@ -1,5 +1,8 @@
-import { createRef, Component } from "preact";
-import ReactNode = preact.ComponentChildren;
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable no-unused-vars */
+import { ComponentChildren as ReactNode, createRef, Component } from "preact";
 type CSSProperties = string | { [key: string]: string | number };
 import PropTypes from "prop-types";
 
@@ -34,7 +37,7 @@ interface ReactAudioPlayerProps {
 
 interface ConditionalProps {
   controlsList?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 class ReactAudioPlayer extends Component<ReactAudioPlayerProps> {

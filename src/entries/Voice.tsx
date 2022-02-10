@@ -14,8 +14,7 @@ const voiceBase =
   dataRoot?.dataset?.voiceBase?.split(",").reduce<{
     [index: string]: string;
   }>((acc, curr) => {
-    let k, v;
-    [k, v] = curr.split(":");
+    const [k, v] = [...curr.split(":")];
     acc[k] = v;
     return acc;
   }, {}) || {};
@@ -34,11 +33,9 @@ const voiceData = Array.from(dataEle).map((ele) => ({
     return acc;
   }, {}),
 }));
-const isMobile = document
+const isMobile = !!document
   .getElementsByTagName("body")[0]
-  .classList.contains("skin-minerva")
-  ? true
-  : false;
+  .classList.contains("skin-minerva");
 console.log(voiceData);
 console.log(voiceBase);
 if (

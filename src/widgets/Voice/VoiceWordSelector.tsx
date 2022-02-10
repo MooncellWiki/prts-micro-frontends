@@ -1,9 +1,7 @@
-import { StateUpdater } from "preact/hooks";
-
 interface props {
   langSet: Set<string>;
   selected: number[];
-  onChange: StateUpdater<number[]>;
+  onChange: (arg0: number[]) => void;
 }
 
 export function VoiceWordSelector({ langSet, selected, onChange }: props) {
