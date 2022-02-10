@@ -30,7 +30,9 @@ export function Voice({
   voiceBase,
 }: props) {
   const [selectedWordLang, setSelectedWordLang] = useState([0]);
-  const [selectedVoicePath, setSelectedVoicePath] = useState("");
+  const [selectedVoicePath, setSelectedVoicePath] = useState(
+    Object.entries(voiceBase).at(0)?.at(1)
+  );
   const isSimplified =
     decodeURIComponent(window.location.href).indexOf("/语音") === -1;
   const [isCollapsed, setIsCollapsed] = useState(true);
