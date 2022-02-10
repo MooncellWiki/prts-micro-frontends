@@ -3,6 +3,13 @@ import colors from "windicss/colors";
 
 export default defineConfig({
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     colors: {
       divider: "#a2a9b1",
       "primary-light": "#22bbff",
