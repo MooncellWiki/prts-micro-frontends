@@ -13,13 +13,11 @@ interface props {
 }
 
 const isSimplified =
-  decodeURIComponent(window.location.href).indexOf("/语音") !== -1
-    ? false
-    : true;
+  decodeURIComponent(window.location.href).indexOf("/语音") === -1;
 
 export function VoicePlayer({ voiceId, voicePath }: props) {
   const [status, setStatus] = useState<playerStatus>(playerStatus.playing);
-  let ref = createRef<ReactAudioPlayer>();
+  const ref = createRef<ReactAudioPlayer>();
   return (
     <div class="container">
       <ReactAudioPlayer
@@ -28,10 +26,10 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
         preload="none"
         title={voiceId}
         ref={ref}
-        onEnded={(e) => setStatus(playerStatus.playing)}
+        onEnded={() => setStatus(playerStatus.playing)}
       />
       <img
-        class="w-10 cursor-pointer"
+        class="md:w-10 <sm:w-7 cursor-pointer"
         title={status == playerStatus.playing ? "播放" : "暂停"}
         src={
           status == playerStatus.playing
@@ -48,17 +46,17 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
               : playerStatus.pause
           );
         }}
-      ></img>
+      />
       {!isSimplified && (
         <a
           href={`//static.prts.wiki/${voicePath}`}
           download={voicePath.split("/").at(-1)}
         >
           <img
-            class="w-10 cursor-pointer"
+            class="md:w-10 <sm:w-7 cursor-pointer"
             title="下载"
             src="/images/f/f1/Download.png"
-          ></img>
+          />
         </a>
       )}
     </div>
