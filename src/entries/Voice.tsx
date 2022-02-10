@@ -1,8 +1,8 @@
-import { render } from "preact";
 import "virtual:windi.css";
+import "../polyfill";
+import { render } from "preact";
 import { Voice } from "../widgets/Voice/VoiceTable";
 import { VoiceMobile } from "../widgets/Voice/VoiceTableMobile";
-
 const ele = document.getElementById("voice-table-root");
 const dataRoot = document.getElementById("voice-data-root");
 const dataEle = dataRoot?.getElementsByClassName(

@@ -28,7 +28,8 @@ export default defineConfig({
           if (
             id.includes("preact") ||
             id.includes("md5") ||
-            id.includes("flyio")
+            id.includes("flyio")||
+            id.includes("core-js")
           ) {
             return "vendor";
           }
