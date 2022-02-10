@@ -82,7 +82,7 @@ export function VoiceMobile({
                   key={childKey}
                   voiceId={`${voiceKey}/${ele?.title}`}
                   voicePath={`${selectedVoicePath}/${ele?.voiceFilename?.replace(
-                    /\b/g,
+                    /\s/g,
                     "_"
                   )}`}
                 />
