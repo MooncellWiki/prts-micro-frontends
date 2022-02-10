@@ -81,8 +81,8 @@ export function VoiceMobile({
                 <VoicePlayer
                   key={childKey}
                   voiceId={`${voiceKey}/${ele?.title}`}
-                  voicePath={`${selectedVoicePath}/${ele?.voiceFilename?.replaceAll(
-                    " ",
+                  voicePath={`${selectedVoicePath}/${ele?.voiceFilename?.replace(
+                    /\b/g,
                     "_"
                   )}`}
                 />
