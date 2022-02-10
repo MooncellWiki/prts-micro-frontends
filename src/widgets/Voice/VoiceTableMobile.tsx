@@ -31,7 +31,7 @@ export function VoiceMobile({
 }: props) {
   const [selectedWordLang, setSelectedWordLang] = useState([0]);
   const [selectedVoicePath, setSelectedVoicePath] = useState(
-    Object.entries(voiceBase).at(0)?.at(1)
+    Object.entries(voiceBase)[0][1]
   );
   const isSimplified =
     decodeURIComponent(window.location.href).indexOf("/语音") === -1;
@@ -92,9 +92,9 @@ export function VoiceMobile({
               {selectedWordLang.map((v, i) => (
                 <p key={i}>
                   <span
-                    lang={Array.from(langSet).at(v) == "日文" ? "ja" : ""}
+                    lang={Array.from(langSet)[v] == "日文" ? "ja" : ""}
                     dangerouslySetInnerHTML={{
-                      __html: ele.detail[Array.from(langSet).at(v) || "中文"],
+                      __html: ele.detail[Array.from(langSet)[v] || "中文"],
                     }}
                   />
                   {ele.cond && <b>({ele.cond})</b>}

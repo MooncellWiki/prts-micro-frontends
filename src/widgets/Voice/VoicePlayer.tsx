@@ -50,7 +50,7 @@ export function VoicePlayer({ voiceId, voicePath }: props) {
       {!isSimplified && (
         <a
           href={`//static.prts.wiki/${voicePath}`}
-          download={voicePath.split("/").at(-1)}
+          download={voicePath.split("/")[-1]}
         >
           <img
             class="md:w-10 <sm:w-7 cursor-pointer"
