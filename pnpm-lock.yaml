@@ -13,7 +13,6 @@ specifiers:
   eslint: 7.32.0
   eslint-config-preact: ^1.3.0
   eslint-config-prettier: ^8.3.0
-  eslint-plugin-compat: ^4.0.2
   eslint-plugin-jsx-a11y: ^6.5.1
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-simple-import-sort: ^7.0.0
@@ -50,7 +49,6 @@ devDependencies:
   eslint: 7.32.0
   eslint-config-preact: 1.3.0_3aafa7a061ccfb24d8064d6152b14f84
   eslint-config-prettier: 8.3.0_eslint@7.32.0
-  eslint-plugin-compat: 4.0.2_eslint@7.32.0
   eslint-plugin-jsx-a11y: 6.5.1_eslint@7.32.0
   eslint-plugin-prettier: 4.0.0_6e6a25a49a944db0fa38418c3ba4bc86
   eslint-plugin-simple-import-sort: 7.0.0_eslint@7.32.0

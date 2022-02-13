@@ -7,8 +7,7 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "preact",
-    "plugin:prettier/recommended",
-    "plugin:compat/recommended"
+    "plugin:prettier/recommended"
   ],
   "plugins": [
     "@typescript-eslint"
