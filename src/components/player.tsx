@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable no-unused-vars */
 import { ComponentChildren as ReactNode, createRef, Component } from "preact";
 type CSSProperties = string | { [key: string]: string | number };
 import PropTypes from "prop-types";
