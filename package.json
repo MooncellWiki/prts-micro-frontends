@@ -60,6 +60,13 @@
     ]
   },
   "browserslist": [
-    "defaults"
+    "Chrome > 70",
+    "edge > 81",
+    "firefox > 70",
+    "safari > 12",
+    "ios_saf > 12",
+    "not opera > 0",
+    "not samsung > 0",
+    "not and_qq > 0"
   ]
 }
