@@ -60,7 +60,7 @@
     ]
   },
   "browserslist": [
-    "Chrome > 70",
+    "chrome > 70",
     "edge > 81",
     "firefox > 70",
     "safari > 12",
