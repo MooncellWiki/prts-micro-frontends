@@ -1,11 +1,4 @@
-import ReactAudioPlayer from "../../components/player";
-import { useState } from "preact/hooks";
-import { createRef } from "preact";
-
-enum playerStatus {
-  pause,
-  playing,
-}
+import { useAudio } from "../../hooks/useAudio";
 
 interface props {
   voiceId: string;
@@ -16,35 +9,17 @@ const isSimplified =
   decodeURIComponent(window.location.href).indexOf("/语音") === -1;
 
 export function VoicePlayer({ voiceId, voicePath }: props) {
-  const [status, setStatus] = useState<playerStatus>(playerStatus.playing);
-  const ref = createRef<ReactAudioPlayer>();
+  const [state, controls, _ref] = useAudio({
+    src: `//static.prts.wiki/${voicePath}`,
+  });
   return (
     <div class="container">
-      <ReactAudioPlayer
-        src={`//static.prts.wiki/${voicePath}`}
-        id={voiceId}
-        preload="none"
-        title={voiceId}
-        ref={ref}
-        onEnded={() => setStatus(playerStatus.playing)}
-      />
       <img
         class="md:w-10 <sm:w-7 cursor-pointer"
-        title={status == playerStatus.playing ? "播放" : "暂停"}
-        src={
-          status == playerStatus.playing
-            ? "/images/9/90/Play.png"
-            : "/images/4/47/Pause.png"
-        }
+        title={state.paused ? "播放" : "暂停"}
+        src={state.paused ? "/images/9/90/Play.png" : "/images/4/47/Pause.png"}
         onClick={() => {
-          status == playerStatus.playing
-            ? ref.current?.audioEl.current?.play()
-            : ref.current?.audioEl.current?.pause();
-          setStatus(
-            status == playerStatus.pause
-              ? playerStatus.playing
-              : playerStatus.pause
-          );
+          state.paused ? controls.play() : controls.pause();
         }}
       />
       {!isSimplified && (
