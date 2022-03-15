@@ -52,8 +52,7 @@
   },
   "lint-staged": {
     "*.{js,tsx}": [
-      "pnpm run lint:fix",
-      "git add"
+      "pnpm run lint:fix"
     ]
   },
   "browserslist": [
