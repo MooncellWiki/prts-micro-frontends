@@ -20,11 +20,6 @@ export function useAudio(
     paused: true,
     playing: false,
   });
-  const onPlay = () => setState((s) => ({ ...s, paused: false }));
-  const onPlaying = () => setState((s) => ({ ...s, playing: true }));
-  const onWaiting = () => setState((s) => ({ ...s, playing: false }));
-  const onPause = () =>
-    setState((s) => ({ ...s, paused: true, playing: false }));
   let lockPlay = false;
   const controls = {
     play: () => {
@@ -63,12 +58,24 @@ export function useAudio(
     audio.controls = false;
     audio.preload = "none";
 
-    audio.onplay = onPlay;
-    audio.onplaying = onPlaying;
-    audio.onwaiting = onWaiting;
-    audio.onpause = onPause;
+    audio.onplay = () => setState((s) => ({ ...s, paused: false }));
+    audio.onplaying = () => setState((s) => ({ ...s, playing: true }));
+    audio.onwaiting = () => setState((s) => ({ ...s, playing: false }));
+    audio.onpause = () =>
+      setState((s) => ({ ...s, paused: true, playing: false }));
 
     ref.current = audio;
+    return () => {
+      if (ref.current) {
+        const el = ref.current;
+        el.onplay = null;
+        el.onplaying = null;
+        el.onwaiting = null;
+        el.onpause = null;
+        el.pause();
+        ref.current = undefined;
+      }
+    };
   }, [props.src]);
   return [state, controls, ref];
 }
