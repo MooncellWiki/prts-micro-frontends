@@ -2,8 +2,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { VoiceWordSelector } from "./VoiceWordSelector";
 import { VoicePlayer } from "./VoicePlayer";
-import { VoiceFileSelector } from "./VoiceFileSelector";
-
+import { Selector } from "../../components/selector";
 interface props {
   tocTitle: string;
   voiceKey: string;
@@ -17,9 +16,7 @@ interface props {
     };
   }[];
   langSet: Set<string>;
-  voiceBase: {
-    [index: string]: string;
-  };
+  voiceBase: Array<{ lang: string; path: string }>;
 }
 
 export function VoiceMobile({
@@ -30,9 +27,7 @@ export function VoiceMobile({
   voiceBase,
 }: props) {
   const [selectedWordLang, setSelectedWordLang] = useState([0]);
-  const [selectedVoicePath, setSelectedVoicePath] = useState(
-    Object.entries(voiceBase)[0][1]
-  );
+  const [selectedVoicePath, setSelectedVoicePath] = useState(voiceBase[0].path);
   const isSimplified =
     decodeURIComponent(window.location.href).indexOf("/语音") === -1;
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -48,8 +43,12 @@ export function VoiceMobile({
           selected={selectedWordLang}
           onChange={setSelectedWordLang}
         />
-        <VoiceFileSelector
-          voiceBase={voiceBase}
+        <Selector
+          id="voice-file-selector"
+          label="选择语音语言"
+          options={voiceBase}
+          valueField="path"
+          labelField="lang"
           onChange={setSelectedVoicePath}
         />
       </div>
