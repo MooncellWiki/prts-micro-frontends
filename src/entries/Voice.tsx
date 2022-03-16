@@ -11,13 +11,13 @@ const dataEle = dataRoot?.getElementsByClassName(
 
 const langSet = new Set<string>();
 const voiceBase =
-  dataRoot?.dataset?.voiceBase?.split(",").reduce<{
-    [index: string]: string;
-  }>((acc, curr) => {
-    const [k, v] = [...curr.split(":")];
-    acc[k] = v;
-    return acc;
-  }, {}) || {};
+  dataRoot?.dataset?.voiceBase?.split(",").map((kvp) => {
+    const [lang, path] = kvp.split(":");
+    return {
+      lang,
+      path,
+    };
+  }) || [];
 const voiceData = Array.from(dataEle).map((ele) => ({
   title: ele?.dataset?.title,
   index: ele?.dataset?.voiceIndex,
