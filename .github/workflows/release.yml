@@ -29,7 +29,7 @@ jobs:
           pnpm run build
           tar -czvf dist.tgz ./dist
       - name: Generate release note
-        run: ./.github/workflows/release-notes.mjs
+        run: node ./.github/workflows/release-notes.mjs
       - name: Create release
         uses: softprops/action-gh-release@v1
         env:
