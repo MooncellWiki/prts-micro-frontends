@@ -36,8 +36,6 @@ const voiceData = Array.from(dataEle).map((ele) => ({
 const isMobile = !!document
   .getElementsByTagName("body")[0]
   .classList.contains("skin-minerva");
-console.log(voiceData);
-console.log(voiceBase);
 if (
   ele &&
   dataRoot?.dataset?.tocTitle &&
