@@ -12,7 +12,7 @@ export function VoiceFileSelector({ voiceBase, onChange }: props) {
         for="voice-file-selector"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
       >
-        选择语音语言
+        选择语音资源差分
       </label>
       <select
         id="voice-file-selector"

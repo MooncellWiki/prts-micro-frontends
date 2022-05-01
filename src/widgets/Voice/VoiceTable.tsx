@@ -45,7 +45,7 @@ export function Voice({
         />
         <Selector
           id="voice-file-selector"
-          label="选择语音语言"
+          label="选择语音资源差分"
           options={voiceBase}
           valueField="path"
           labelField="lang"
