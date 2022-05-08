@@ -11,7 +11,7 @@ export function VoiceWordSelector({ langSet, selected, onChange }: props) {
         for="voice-word-selector"
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
       >
-        选择显示文本语言
+        选择语音文本差分
       </label>
       <div
         id="voice-word-selector"
