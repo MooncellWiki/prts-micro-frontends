@@ -2,7 +2,7 @@ import { Avatar } from "../components/avatar";
 import { Tabs } from "../components/tabs";
 import { useEffect, useState } from "preact/hooks";
 import { Skeleton } from "../components/skeleton/skeleton";
-import { api, professionMap, sum } from "../utils/utils";
+import { apiEndPoint, professionMap, sum } from "../utils/utils";
 interface costProps {
   rarity: number;
   name: string;
@@ -71,7 +71,9 @@ interface resp {
   [index: string]: costProps;
 }
 async function query(name: string): Promise<itemCost> {
-  const { data } = await api.get(`/widget/itemDemand/${name}`);
+  const data: resp = await (
+    await fetch(`${apiEndPoint}/widget/itemDemand/${name}`)
+  ).json();
   console.log(data);
   const costs = new Array<cost>(6);
   const total = {
@@ -81,7 +83,7 @@ async function query(name: string): Promise<itemCost> {
     uniequip: 0,
     total: 0,
   };
-  Object.keys(data as resp).forEach((key) => {
+  Object.keys(data).forEach((key) => {
     const v = data[key] as costProps;
     const cost = costs[v.rarity] || { label: `${v.rarity + 1}星`, data: [] };
     cost.data.push(v);
