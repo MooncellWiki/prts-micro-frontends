@@ -11,6 +11,8 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@sentry/browser": "^7.0.0",
+    "@sentry/tracing": "^7.0.0",
     "md5": "^2.3.0",
     "preact": "^10.7.2"
   },
