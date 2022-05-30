@@ -1,3 +1,4 @@
-import { login } from "./api.mjs";
+import { edit, login } from "./api.mjs";
 
-login("夕舞八弦", "*U6c6f7665646f67");
+// await login();
+// await edit();

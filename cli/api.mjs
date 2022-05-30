@@ -16,11 +16,11 @@ export async function getCsrfToken() {
     query: {
       action: "query",
       meta: "tokens",
-      format: "json",
       type: "csrf",
+      format: "json",
     },
   });
-  return resp;
+  return resp.query.tokens.csrftoken;
 }
 async function getLoginToken() {
   const resp = await request({
@@ -51,4 +51,20 @@ export async function login(name, password) {
   if (resp?.login?.result?.toLowerCase() !== "success") {
     throw new Error(resp);
   }
+}
+export async function edit(pagename, content, summary) {
+  let token = await getCsrfToken();
+  const resp = await request({
+    method: "POST",
+    body: {
+      action: "edit",
+      title: pagename,
+      text: content,
+      bot: 1,
+      summary,
+      token,
+      format: "json",
+    },
+  });
+  console.log(resp);
 }
