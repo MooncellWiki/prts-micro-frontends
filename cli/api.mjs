@@ -52,7 +52,11 @@ export async function login(name, password) {
     throw new Error(resp);
   }
 }
-export async function edit(pagename, content, summary) {
+export async function edit(
+  pagename,
+  content,
+  summary = "by prts-micro-frontends cli"
+) {
   let token = await getCsrfToken();
   const resp = await request({
     method: "POST",
@@ -64,7 +68,20 @@ export async function edit(pagename, content, summary) {
       summary,
       token,
       format: "json",
+      createonly: 1,
     },
   });
   console.log(resp);
+}
+async function view(pagename) {
+  return got(`https://prts.wiki/w/${pagename}`);
+}
+export async function checkPageExist(pagename) {
+  try {
+    await view(pagename);
+    return true;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
 }
