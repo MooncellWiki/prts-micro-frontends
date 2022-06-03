@@ -1,12 +1,9 @@
 import MD5 from "md5";
-import fly from "flyio";
+export const apiEndPoint = "https://api.prts.wiki";
 export function getImagePath(filename: string) {
   const md5 = MD5(filename);
   return `${md5.slice(0, 1)}/${md5.slice(0, 2)}/${filename}`;
 }
-
-fly.config.baseURL = "https://api.prts.wiki";
-export const api = fly;
 
 export const professionMap = {
   PIONEER: "先锋",
