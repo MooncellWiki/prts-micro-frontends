@@ -76,7 +76,7 @@ export function Voice({
               <div class="table-cell text-center font-bold p-1 !bg-table border border-solid border-divider align-middle truncate">
                 {ele.title}
               </div>
-              <div class="table-cell p-2 border border-solid border-divider rounded align-middle">
+              <div class="table-cell w-full p-2 border border-solid border-divider rounded align-middle">
                 {selectedWordLang.map((v, i) => (
                   <p key={i}>
                     <span
