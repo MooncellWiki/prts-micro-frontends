@@ -33,6 +33,12 @@ const voiceData = Array.from(dataEle).map((ele) => ({
     return acc;
   }, {}),
 }));
+
+// 挂到window上面给上面的charInfo用
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore;
+window.charVoice = voiceData;
+
 const isMobile = !!document
   .getElementsByTagName("body")[0]
   .classList.contains("skin-minerva");
